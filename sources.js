@@ -26,7 +26,7 @@ window.addEventListener ("load", () => {
     select.addEventListener ("change", () => {
         if (!lock) {
             lock = true;
-            getFile(code.value + ".ml");
+            getFile(select.value + ".ml");
         }
 
     });
