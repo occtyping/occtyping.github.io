@@ -9,9 +9,13 @@ window.addEventListener ("load", () => {
         xhr.open("GET", url);
         xhr.overrideMimeType("text/plain");
         xhr.addEventListener("readystatechange", () => {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                code.value = xhr.responseText;
-                output.innerHTML = "";
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200)  {
+                    code.value = xhr.responseText;
+                    output.innerHTML = "";
+                } else {
+                    console.log("Unknown file " + url);
+                }
                 lock = false;
             }
         });
@@ -20,10 +24,9 @@ window.addEventListener ("load", () => {
 
 
     select.addEventListener ("change", () => {
-        let n = +(select.value);
-        if (n >= 0 && n <= 9 && !lock) {
+        if (!lock) {
             lock = true;
-            getFile(n + ".ml");
+            getFile(code.value + ".ml");
         }
 
     });
